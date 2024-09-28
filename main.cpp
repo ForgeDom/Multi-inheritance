@@ -7,12 +7,14 @@ protected:
     int side;
 public:
     Square(int s) : side(s) {}
-
-    int getSide() const {
+    virtual ~Square() {
+        cout << "Square destructor called" << endl;
+    }
+    virtual int getSide() const {
         return side;
     }
 
-    double getArea() const {
+    virtual double getArea() const {
         return side * side;
     }
 };
@@ -22,12 +24,14 @@ protected:
     int radius;
 public:
     Circle(int r) : radius(r) {}
-
-    int getRadius() const {
+    virtual ~Circle() {
+        cout << "Circle destructor called" << endl;
+    }
+    virtual int getRadius() const {
         return radius;
     }
 
-    double getArea() const {
+    virtual double getArea() const {
         return 3.14 * radius * radius;
     }
 };
@@ -36,6 +40,9 @@ class CircleInSquare : public Square, public Circle {
 public:
     CircleInSquare(int side) : Square(side), Circle(side / 2) {}
 
+    ~CircleInSquare() { 
+        cout << "CircleInSquare destructor called." << endl;
+    }
     void Show() const {
         cout << "Square side: " << getSide() << endl;
         cout << "Circle radius: " << getRadius() << endl;
@@ -45,8 +52,9 @@ public:
 };
 
 int main() {
-    CircleInSquare size(10);
-    size.Show();
+    CircleInSquare* size = new CircleInSquare(10);
+    size->Show();
+    delete size;
     return 0;
 }
 //Images\background.png

@@ -40,7 +40,7 @@ public:
 	}
 };
 
-class Car : public Wheels, public Engine, public Doors {
+class Car : virtual public Wheels, virtual public Engine, virtual public Doors {
 protected:
 	string car_model;
 public:
